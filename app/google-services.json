@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1020251800466",
+    "project_id": "carbon-quanta-170806"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020251800466:android:9e7f1d3ef4d7a0d1",
+        "android_client_info": {
+          "package_name": "com.example.iiitd.ip1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020251800466-qvcbo5u234p51dgmrik9dc0fvk2fmmjd.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1020251800466-7qv86egohedhsr7e0ahmc4j9981eakod.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iiitd.ip1",
+            "certificate_hash": "6dc808cd4127845d51b5a358b0050d200ca9f5fb"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDED2ZkvDvJmCPpPYiPv9cbY0eKjMDRuF8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
