@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.iiitd.ip1.SummaryActivity"
+    tools:showIn="@layout/app_bar_summary">
+
+</android.support.constraint.ConstraintLayout>
+-->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.iiitd.ip1.SummaryActivity"
+    tools:showIn="@layout/app_bar_summary">
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.iiitd.ip1.SummaryActivity"
+    tools:showIn="@layout/app_bar_summary"
+    >
+   <android.support.v7.widget.CardView
+       xmlns:card_view="http://schemas.android.com/apk/res-auto"
+       android:layout_gravity="center"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       card_view:cardCornerRadius="4dp"
+       android:padding="5dp"
+       card_view:cardBackgroundColor="@color/cardview_light_background"
+       >
+
+      <TextView
+          android:id="@+id/chart1_text"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:gravity="top|center_horizontal"
+          android:padding="5dp"
+          android:text="Hourly"
+          android:textStyle="bold">
+      </TextView>
+
+      <!--android:textColor="@color/darkslate"
+      android:textSize="@dimen/font_normal_size"-->
+
+       <com.github.mikephil.charting.charts.BarChart
+           android:id="@+id/chartHourly"
+           android:layout_width="match_parent"
+           android:layout_height="250dp"
+           android:layout_marginTop="25dp"
+           android:padding="2dp"
+           android:paddingBottom="4dp" />
+   </android.support.v7.widget.CardView>
+
+
+
+
+</LinearLayout>
+</ScrollView>

@@ -1,6 +1,7 @@
 package com.example.iiitd.ip1;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.example.iiitd.ip1.Utitlity.GoogleSignInUtility;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
@@ -19,10 +21,11 @@ import com.google.android.gms.common.api.Status;
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,View.OnClickListener{
     public static final String TAG = "MainActivity";
+    private static final String EXTRA_IS_SIGN_IN="com.example.iiitd.ip1.is_sign_in";
     private GoogleSignInUtility mGoogleSignInUtility;
-    private SignInButton mSignInButton;
-    private ProgressDialog mProgressDialog;
-
+    private ProgressDialog mProgressDialog = null;
+    private SignInButton mSignInButton = null;
+    private boolean IsSignIn = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,21 +33,32 @@ public class MainActivity extends AppCompatActivity implements
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
+
         //
         mGoogleSignInUtility = new GoogleSignInUtility(this);
         mGoogleSignInUtility.registerConnectionCallBack(this, this);
+
         //
-        initView();
+        mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
+
         //
+        IsSignIn= getIntent().getBooleanExtra(EXTRA_IS_SIGN_IN,false);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        if(!IsSignIn){
+            initView(false);
+
+        }
         GoogleSignInResult googleSignInResult = mGoogleSignInUtility.checkUserCacheAvaliable();
         if (googleSignInResult != null) {
             handelSignInResult(googleSignInResult);
+            //initView(true);
         }
+        else initView(false);
     }
 
     @Override
@@ -52,11 +66,12 @@ public class MainActivity extends AppCompatActivity implements
         super.onStop();
     }
 
-    public void initView() {
-        //mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        if (mSignInButton != null) {
+    public void initView(boolean isSignIn) {
+        //
+        if (!isSignIn) {
             mSignInButton.setSize(SignInButton.SIZE_STANDARD);
             mSignInButton.setScopes(mGoogleSignInUtility.getGoogleSignInOption().getScopeArray());
+            updateUI(false,null,null);
         }
 
         //mSignInButton.setOnClickListener(this);
@@ -72,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void handelSignInResult(GoogleSignInResult googleSignInResult) {
+        Log.d(TAG, "handleSignInResult:" + googleSignInResult.isSuccess());
         if (googleSignInResult.isSuccess()) {
             Log.d(TAG, " login success : " + googleSignInResult.getSignInAccount().getEmail());
             Log.d(TAG, " id auth code : " + googleSignInResult.getSignInAccount().getServerAuthCode());
@@ -122,11 +138,18 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void updateUI(boolean signedIn,String emailID,String userName) {
-        if (signedIn) {
+        /*if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
             Intent i = HomeActivity.newIntent(MainActivity.this,emailID,userName);
+
+            //to put MainActivity on top of stack with no other activities of our
+            // application on the backstack.
+
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(i);
 
         } else {
@@ -135,7 +158,14 @@ public class MainActivity extends AppCompatActivity implements
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
             findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-        }
+        }*/
+    }
+
+    public static Intent newIntent(Context packageContext,Boolean signOut){
+        Intent i = new Intent(packageContext,HomeActivity.class);
+        i.putExtra(EXTRA_IS_SIGN_IN,signOut);
+        return i;
+
     }
 
 }

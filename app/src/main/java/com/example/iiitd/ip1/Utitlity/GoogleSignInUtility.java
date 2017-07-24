@@ -1,4 +1,4 @@
-package com.example.iiitd.ip1;
+package com.example.iiitd.ip1.Utitlity;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 /**
  * Created by iiitd on 21/6/17.
@@ -94,7 +95,6 @@ public class GoogleSignInUtility {
         }
         return null;
     }
-
     public void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         mFragmentActivity.startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -104,6 +104,16 @@ public class GoogleSignInUtility {
         Auth.GoogleSignInApi.signOut(getGoogleApiClient()).setResultCallback(resultCallback);
     }
 
+    public void signOut() {
+        Auth.GoogleSignInApi.signOut(getGoogleApiClient()).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(Status status) {
+                // [START_EXCLUDE]
+                //updateUI(false, null);
+                // [END_EXCLUDE]
+            }
+        });
+    }
     public void revokeAccess(ResultCallback resultCallback) {
         Auth.GoogleSignInApi.revokeAccess(getGoogleApiClient()).setResultCallback(resultCallback);
     }

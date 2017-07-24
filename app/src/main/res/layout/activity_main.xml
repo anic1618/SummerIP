@@ -30,12 +30,13 @@
             android:textColor="@android:color/white"
             android:textSize="36sp" />
 
-        <Button
-            android:id="@+id/sign_out_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_out"
-            android:theme="@style/ThemeOverlay.MyDarkButton" />
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_out"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
+        android:visibility="gone" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
